@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Şiir Kıyısı</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:'Libre Baskerville',serif;
+color:#f3f3f3;
+background:linear-gradient(180deg,#050b1a,#3b0d24);
+min-height:100vh;
+overflow-x:hidden;
+}
+
+body.page-exit{
+animation:waveSlide .6s cubic-bezier(.4,0,.2,1) forwards;
+}
+
+@keyframes waveSlide{
+from{transform:translateX(0);opacity:1}
+to{transform:translateX(-160px);opacity:0}
+}
+
+.container{
+max-width:760px;
+margin:0 auto;
+padding:100px 24px 80px;
+text-align:center;
+}
+
+h1{
+font-family:'Playfair Display',serif;
+font-size:52px;
+margin-bottom:24px;
+}
+
+p{
+font-size:18px;
+line-height:1.8;
+margin-bottom:28px;
+}
+
+.buttons{margin:32px 0 20px}
+
+.button{
+display:inline-block;
+margin:8px;
+padding:12px 28px;
+border:1px solid rgba(255,255,255,.7);
+color:#fff;
+text-decoration:none;
+cursor:pointer;
+transition:.3s;
+}
+
+.button:hover{
+background:#fff;
+color:#2a0d1c;
+}
+
+.wave-btn{
+margin:24px auto 40px;
+padding:10px 26px;
+border-radius:40px;
+border:1px solid rgba(255,255,255,.4);
+background:linear-gradient(135deg,rgba(20,60,120,.6),rgba(120,20,60,.6));
+cursor:pointer;
+transition:.3s;
+}
+
+.wave-btn:hover{transform:scale(1.05)}
+
+h2{
+font-family:'Playfair Display',serif;
+font-size:32px;
+margin:50px 0 10px;
+}
+
+.spotify-wrapper{
+margin-top:24px;
+padding:12px;
+border-radius:22px;
+background:rgba(255,255,255,.06);
+box-shadow:0 20px 45px rgba(0,0,0,.45);
+}
+
+iframe{
+width:100%;
+height:232px;
+border:none;
+border-radius:14px;
+}
+
+footer{
+margin-top:80px;
+font-size:14px;
+opacity:.8;
+}
+
+footer a{
+color:inherit;
+text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Şiir Kıyısı</h1>
+
+<p>Bu kıyıda şiir sadece okunmaz.<br>Yaşanır, hissedilir, ruha işlenir.</p>
+
+<p>
+Kâh şahsıma münhasır kelamlarım ve nefesimle,<br>
+kâh değerli şairlerimizin dizelerini seslendirirken sizlerleyim.
+</p>
+
+<div class="buttons">
+<a class="button" href="https://open.spotify.com/show/2UJY99lYNUZMZ1NTLSnMtx" target="_blank">Spotify’da Dinle</a>
+<a class="button" href="https://www.youtube.com/@Siir_kiyisi" target="_blank">YouTube’da İzle</a>
+<a class="button" id="siirlerBtn">Şiirler</a>
+</div>
+
+<div class="wave-btn" id="waveBtn">🌊 Dalga Sesi</div>
+
+<h2>Son Bölüm: Tanışma</h2>
+<p><em>Serkan Uçar’ın kaleminden</em></p>
+
+<div class="spotify-wrapper">
+<iframe src="https://open.spotify.com/embed/episode/52GX18ZFVVaGi1MoYt5GQu"></iframe>
+</div>
+
+<footer>
+<div>Yorumlarınız benim için kıymetlidir.</div>
+<div>📩 <a href="mailto:zahitmelih.turkoglu@gmail.com">zahitmelih.turkoglu@gmail.com</a></div>
+<div>© Şiir Kıyısı</div>
+</footer>
+
+</div>
+
+<!-- SESLER -->
+<audio id="waveAudio" loop src="waves.mp3"></audio>
+<audio id="whooshAudio" src="whoosh.mp3"></audio>
+
+<script>
+const wave = document.getElementById("waveAudio");
+const whoosh = document.getElementById("whooshAudio");
+const waveBtn = document.getElementById("waveBtn");
+const siirlerBtn = document.getElementById("siirlerBtn");
+
+let playing=false;
+let fade;
+
+function fadeWave(target){
+clearInterval(fade);
+fade=setInterval(()=>{
+if(Math.abs(wave.volume-target)<.03){
+wave.volume=target;
+if(target===0)wave.pause();
+clearInterval(fade);
+}else{
+wave.volume+=wave.volume<target?.04:-.06;
+}
+},50);
+}
+
+waveBtn.onclick=()=>{
+if(!playing){
+wave.volume=0;
+wave.play();
+fadeWave(.7);
+waveBtn.innerText="🌊 Dalgaları Durdur";
+playing=true;
+}else{
+fadeWave(0);
+waveBtn.innerText="🌊 Dalga Sesi";
+playing=false;
+}
+};
+
+siirlerBtn.onclick=()=>{
+// WHOOSH GARANTİLİ
+whoosh.currentTime=0;
+whoosh.volume=1;
+whoosh.play();
+
+// DALGA HIZLI KIS
+if(playing)fadeWave(0);
+
+// GÖRSEL
+document.body.classList.add("page-exit");
+
+setTimeout(()=>{
+location.href="siirler.html";
+},600);
+};
+</script>
+
+</body>
+</html>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Şiirler | Şiir Kıyısı</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:'Libre Baskerville',serif;
+color:#f3f3f3;
+background:linear-gradient(180deg,#050b1a,#3b0d24);
+min-height:100vh
+}
+.container{max-width:900px;margin:0 auto;padding:80px 24px 100px}
+h1{text-align:center;font-family:'Playfair Display',serif;font-size:48px;margin-bottom:12px}
+.subtitle{text-align:center;opacity:.8;margin-bottom:60px}
+h2{font-family:'Playfair Display',serif;margin:60px 0 24px;font-size:28px}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:24px
+}
+
+.card{
+padding:24px;
+border-radius:18px;
+background:rgba(255,255,255,.06);
+backdrop-filter:blur(6px);
+box-shadow:0 10px 30px rgba(0,0,0,.35);
+transition:.3s
+}
+.card:hover{transform:translateY(-6px)}
+
+.card h3{
+font-family:'Playfair Display',serif;
+margin:0 0 8px;
+font-size:22px
+}
+.author{font-size:14px;opacity:.75;margin-bottom:18px}
+
+.card-buttons{
+display:flex;
+gap:10px;
+flex-wrap:wrap
+}
+
+.btn{
+padding:8px 18px;
+font-size:14px;
+border-radius:20px;
+border:1px solid rgba(255,255,255,.6);
+background:transparent;
+color:#fff;
+cursor:pointer;
+transition:.3s;
+text-decoration:none
+}
+.btn:hover{background:#fff;color:#2a0d1c}
+
+.modal{
+position:fixed;
+inset:0;
+background:rgba(5,10,20,.8);
+backdrop-filter:blur(6px);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:1000
+}
+.modal.active{display:flex}
+
+.modal-content{
+background:linear-gradient(180deg,#0a132b,#3b0d24);
+padding:36px;
+border-radius:22px;
+max-width:640px;
+width:90%;
+max-height:80vh;
+overflow-y:auto;
+position:relative
+}
+.modal-content h3{
+font-family:'Playfair Display',serif;
+margin-top:0;
+font-size:30px
+}
+.modal-content p{
+line-height:1.9;
+font-size:17px;
+white-space:pre-wrap
+}
+.close{
+position:absolute;
+top:16px;
+right:20px;
+font-size:26px;
+cursor:pointer
+}
+
+.back{text-align:center;margin-top:80px}
+.back a{color:#fff;text-decoration:none;opacity:.7}
+.back a:hover{opacity:1}
+
+.contact{text-align:center;margin-top:60px;font-size:15px;opacity:.85}
+footer{text-align:center;margin-top:40px;font-size:14px;opacity:.6}
+
+.contact a,
+.comment-box a {
+  color: #f3f3f3;
+  text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1>Şiirler</h1>
+<div class="subtitle">Kimi bana ait, kimi seslendirdiğim dizeler…</div>
+
+<h2>Kendi Şiirlerim</h2>
+
+<div class="cards">
+
+<div class="card"><h3>MÜDAVİM</h3><div class="author">✍️ Şair: Zahit Melih Türkoğlu</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('mudavim')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/1DNrly2tXcT6HFow75nTHb">Dinle</a>
+</div></div>
+
+<div class="card"><h3>İNCE BİR SIZI</h3><div class="author">✍️ Şair: Zahit Melih Türkoğlu</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('inceBirSizi')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/3qOMtBrEKRKjZefWKT4TcU">Dinle</a>
+</div></div>
+
+<div class="card"><h3>ÇEYREK ASIR</h3><div class="author">✍️ Şair: Zahit Melih Türkoğlu</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('ceyrekAsir')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/3lm5ATbwnAX8J5qpLR9jZ5">Dinle</a>
+</div></div>
+
+<div class="card"><h3>NAFİLE</h3><div class="author">✍️ Şair: Zahit Melih Türkoğlu</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('nafile')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/2YRVo2Ctn3OQPevt9Jantz">Dinle</a>
+</div></div>
+
+<div class="card"><h3>HİCRAN KAHVEM</h3><div class="author">✍️ Şair: Zahit Melih Türkoğlu</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('hicranKahvem')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/2VO4A8LYIQl1X1b2z15AFb">Dinle</a>
+</div></div>
+
+<div class="card"><h3>ABİS</h3><div class="author">✍️ Şair: Zahit Melih Türkoğlu</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('abis')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/3UuONKxqTdnIghDmp5lFyb">Dinle</a>
+</div></div>
+
+<div class="card"><h3>BALSA</h3><div class="author">✍️ Şair: Zahit Melih Türkoğlu</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('balsa')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/1aX9UUSVcl14A0YAoMF7Fk">Dinle</a>
+</div></div>
+
+<div class="card"><h3>KIRLANGIÇ</h3><div class="author">✍️ Şair: Zahit Melih Türkoğlu</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('kirlangic')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/5NZUeOJQ7srxMYiN9DL9aQ">Dinle</a>
+</div></div>
+
+<div class="card"><h3>GÜNDÜZSEFASI</h3><div class="author">✍️ Şair: Zahit Melih Türkoğlu</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('gunduzsefasi')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/5WMMQ40XrNmfxPSLPmNqhT">Dinle</a>
+</div></div>
+
+</div>
+
+<div class="back"><a href="index.html">← Anasayfaya Dön</a></div>
+<div class="contact">
+    Yorumlarınız benim için kıymetlidir.<br>
+    <div>📩 <a href="mailto:zahitmelih.turkoglu@gmail.com">
+      zahitmelih.turkoglu@gmail.com
+    </a>
+  </div>
+
+  <footer>© Şiir Kıyısı</footer>
+
+</div>
+
+<div class="modal" id="modal">
+<div class="modal-content">
+<div class="close" onclick="closeModal()">×</div>
+<h3 id="modalTitle"></h3>
+<p id="modalText"></p>
+</div>
+</div>
+
+<script>
+const poems = {
+mudavim:{title:"MÜDAVİM",text:`Geçen gece bıraktığım yerdeydim.
+Vakitsiz bir ziyaretti, biliyorum
+Bıraktığım gibi de değil ama
+Ne acı ki, görüyorum.
+Yürüyorum, hissedene kadar…
+Üstümde nar lekeli beyaz bir gömlek var
+Bir değil 1000 defa deniyorum ama
+Düğmeleri yarıya kadar iliklenmiş bu gömleğin
+yakalarını birleştiremiyorum
+Göğsümün solunda medcezir bir sancı
+Ruhum ise dört mevsime hancı…
+Kulaklarım tırmalanıyor defalarca her adımımda
+Dayanamıyorum,
+Açıyorum gözlerimi.
+Biliyorum, bu o vazgeçilmez sanrı,
+Sınırları kanla çizilen..
+Olanların farkındayım.
+Yarım kalan Hamleti alıyorum elime
+Buluyorum gözüm kapalı sayfayı ve
+Devam ediyorum kaldığım yerden,
+Sonra, bir cümlesi yetiyor gecemi aydınlatmaya
+Unutkanlığımı hatırlatan bir bilmece takılıyor
+ak ciğerimin dallarına
+Ezelden beri sayıklanan ama
+cevabı hiç bulunamayan o nacizane muamma..
+Dışarıda zemheri bir hava,
+Bedenimde ise bir ürperti
+Ve ağzımda kan tadı var.
+Dayanamıyorum.
+Gözlerimi kapatıyorum.`},
+
+inceBirSizi:{title:"İNCE BİR SIZI",text:`Esrarengiz odamın hava kaçıran penceresi
+Ve karşısındaki manzaranın enfes gölgesi..
+Gözlerimdeki bulanıklık gidiyor
+Ve netleşiyor gördüklerim
+Sigara yakıyorum bir tane
+Hayalimde
+Bende oturuyorum o masada.
+Isınıyorum mercimek çorbasıyla
+Komiklikler ve şakalarla..
+Duyuyorum
+Perdeler bile gülüyor.
+Görüyorum
+Suyun bile tadı farklı.
+Hissediyorum
+Kaslarım gerginliğinden memnun,
+Ekmeği, tabağı uzatır gibi..
+Biliyorum
+Dünyadaki en pahalı koku ne diye sorsalar,
+O mayhoş odanın ruhuma sinen kokusu derim.
+Tanır ya hani o kokuyu insan,
+Burnunun direği sızlar
+Derin bir iç çektirir
+Ruhun hatırlar
+Kilometrelerce öteden, aniden..
+Kitaplarda yazmayan o esaretin tatlı keskin tarifinden..
+Bu yüzdendir belki de koku hafızası güçlüdür.
+Senelere, kilometrelere hükmeder
+İzini her daim korur.
+İzlere ve bulunduğu yere
+Ait hissedemeyen ise
+Mahpus kalır,
+Yorulur.`},
+
+ceyrekAsir:{title:"ÇEYREK ASIR",text:`Merhaba dostum
+Gözlerinde gördüklerim yeterince kafî
+İçine hapsetmiş seni büyük bir trajikomedi
+Merak etme artık nadas vakti geldi..
+Mevsimler birbiri ardında akıp kaybolurken
+Baharları çağırana dek bir ömür geçti
+Renkler değişti, dünya renklendi
+Kitaplar yakınsak, kalabalıklar ise ırak
+Söylesene, bu mudur yaşamak?
+Göğnümün duvarına bir çentik daha..
+Ah be dostum..
+Sen böyle değildin dediğini duyar gibiyim.
+Onmaz bir eksiklik mısralarımda,
+Çözülemeyen bir düğüm hâlâ
+Şimdi sessizliğe bürünmüş bir halde
+Özgür ruhumun tutsaklığında
+Di’li geçmiş zamanın çıkmazı bu şimdilerde
+Düşüşlerin naçizane gölgesinde
+Ezber bozan birkaç mısra eşliğinde
+Şahlandığı anda vuruldu kara sevda
+Olduğu yerde uzandı kararınca
+Ne de olsa kalkacaktı eninde sonunda
+Kalktı ve uçtu arşa
+Canla, umutla, kırık kanadıyla
+Çeyrek asırı devirdi,
+Kaderi boğuk, bedeni savruk
+Maî apoletli kayık kepli bu çocuk..
+Bedeninin hayat-ı içtimaideki duruşu nizami
+Ruhu ise
+Kayıp evren atlasında
+Sessiz bir gemi..`},
+
+nafile:{title:"NAFİLE",text:`Zaman ve nasip…
+Birbirini kovalayan iki bilmece
+Bilmem kaç bilinmeyenli denklemden hallice
+Bu garip ise yazar hayattan çekimserce
+Biçtiği o mahrem ant gereğince
+Kuşandı göğün kıyafetini cengaverce
+Maî’nin ona getireceklerinden habersizce
+Pervasız bir kartaldı kendince
+Süzüldü mağduriyetin ufkunda kilometrelerce
+Şahit oldu zulme, hüzne çaresizce
+Gördü insanların nasıl sırt döndüğünü nankörce
+Ve nasıl sırıttıklarını yüzsüzce
+Dünyayı ve üzerindeki varlıkları tanıdı böylece
+Temmuz alevinin zemheriye dönüştüğünü görünce
+Bir vaveyla koptu yüreğinden derince
+Tüm acıları dindirmek isterdi gönlünce
+Bilakis, nafile…`},
+
+hicranKahvem:{title:"HİCRAN KAHVEM",text:`Kim demiş duvarlar konuşamaz diye,
+Bir gün bana güzel bir söz söyledi izleriyle:
+Önemli olan kahvenin tadı değil zaten,
+Kiminle içtiğin dedi kifayetle.
+Bir şeyler oluyor yaz ortasında ve ben
+Kalkıp gidiyorum uzaklara
+Kahvem hala sıcak ama ben üşüyorum.
+Kırk yıla ihanet etmiş
+Kırık bir hayale yapılmış acı bir teselli
+Tadı damakta kalan yarim hicran kahve.
+Telvesi pisti terk eden uçaktan hallice..
+Kahvem soğuyor ve ben üşüyorum.
+Turgut demiş ya hani insan deli olur diye
+Biz miyiz sahiden güzel vakitlere hükmeden?
+Söylesin o vakit, duyulur mu bu içten feryat gerçekten?
+Divane olmayan ne anlar haleti ruhiyemden?
+Kahvem soğuyor ve ben üşüyorum.
+Mecburiyetler ülkesinin naçar seyyahı
+Rikkatsizliğe mısralarla cevap veren kalem
+Durma, harbe devam et
+Dayanmaz başka türlüsüne sinem..
+Bir yudum daha , ha gayret özlem.
+Bu nasıl biçare mevcudiyet?
+Ne uğruna görülen bu acımasız reva?
+Tesellisi olmayan tanımsız bir eziyet
+Fakat her daim asil duruşlu mai bir apolet
+Kahvem soğuyor ve ben üşüyorum.
+Meyus giryelerin beslediği Bitmek tükenmek bilmeyen şu yaşam kaygısı
+Kendi halinde yaşadığın dünyanda ışığı kapatıp,
+Karanlığından dem vurmaları cabası..
+Kahvem soğuyor ve ben üşüyorum.
+Bir gün uçup gidiyorum evimden
+Masamda kalıyor
+Gençliğim, anılarım, katresi muzdarip kahvem
+Ve
+Kalanlarımı toprağa ekiyorum.
+Kahvem soğuyor ve ben gidiyorum.`},
+
+abis:{title:"ABİS",text:`Özgün bir yaşam peşinde sürüklendi kaderim
+Haliyle oldu yanlış, doğru ve belirsizliklerim
+Lakin en güzel dersim iyi kilerim.
+Nefes alıp vererek geçirdim dehri
+Böyle derbeder yaşamaya devam ederim
+Ne vakit yad el görse
+Benim naçizane efsunlu kederim
+Nerede basacak damarıma, iyi bilirim.
+Seneler boyu vefalı an’lar biriktiririm
+Ayaklanır namütenahi umudumun hemdemi
+Pejmürde düzendeki antika bedenim
+Olur gürbüz bir devrim
+Günler, aylar, yıllar geçer
+İç çeker, maviliğime dönerim.
+Günyüzüne çıkmayı bekler
+Abis kadar derinlerde saklı
+Delikanlı sevdam
+Ve
+Esir hislerim.`},
+
+balsa:{title:"BALSA",text:`Başlangıçları sevmeyen mızmız bir çocuk misali
+Yola çıktım mecburiyetler girdabında
+Anılarıma yaslandım dinlenirim umuduyla..
+Kim bilir belki ferahlık olur bu can ızdırabına
+Belki tren, belki araba belki de kelamlarımda
+Bedenim yüklerin ağırlığı altında
+İki büklüm ama kökleriyle balsa
+Sol yanında kalan birkaç parça umutla.
+Ruhumun ise cebi delik,
+Sızdırır hazin kokulu lahza
+Ele geçirir benliğimi usulca
+Dört bir yanımda vurdumduymaz yama.
+Dakikalar,saatler,günler ardında
+Kifayetsiz birkaç mısra
+Yarım kalmış bir sigara
+Ve izmarit dolu
+Eksik bir hayatla..`},
+
+kirlangic:{title:"KIRLANGIÇ",text:`Gecenin sessiz yalnızlığında yankılanır
+Aheste adımların ebedi izleri.
+Sokakta duyulur Sezen Aksu nameleri..
+Fakat bilmelisiniz ki,
+Geri dönüşü yok bu gidişin..
+Sahi hisseden oldu mu varlığını kişinin?
+Tanıyan çıkmadı, naçarahali
+Ama benim dostumdur kendisi
+O ki,
+Yolların müdavimi,
+Kelimelerin neferi..
+O ki,
+Suskun, bedbaht ve yaşlı gözleri
+Göç vaktini kaçırmış bir kırlangıç gibi...`},
+
+gunduzsefasi:{title:"GÜNDÜZSEFASI",text:`Aheste aheste, lâl bir dinginlikle
+Duyuluyor ufukta alacakaranlığın vaveylası…
+Doğanın duyduğu maînin hoş sedası
+Gökyüzü şimdi yeni umutların lambası.
+Hüzmesi müşfik ruhların sabah sefası…
+Sanatçı ki, şahsa münhasır fırçası
+Bulutlar ise bu evrimin yekpare parçası,
+Gökyüzü şimdi bir sanat harikası.
+Sokakları tazeler seslerinin hafızası,
+Çiçekçilerde satılan gündüzsefası…
+Gökyüzü şimdi aydınlık bir renk atlası,
+Ümidin kızıl muharibi, huzurun kumpanyası...`}
+};
+
+function openModal(k){
+modalTitle.innerText = poems[k].title;
+modalText.innerText = poems[k].text;
+modal.classList.add("active");
+}
+function closeModal(){
+modal.classList.remove("active");
+}
+</script>
+
+</body>
+</html>
