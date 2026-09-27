@@ -5,115 +5,228 @@
 <title>Şiirler | Şiir Kıyısı</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Libre+Baskerville&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
 <style>
 *{box-sizing:border-box}
+
 body{
 margin:0;
 font-family:'Libre Baskerville',serif;
 color:#f3f3f3;
-background:linear-gradient(180deg,#050b1a,#3b0d24);
-min-height:100vh
+background:linear-gradient(135deg,#030712 0%,#0f172a 50%,#2e081c 100%);
+background-attachment: fixed;
+min-height:100vh;
+overflow-x:hidden;
+position:relative;
 }
-.container{max-width:900px;margin:0 auto;padding:80px 24px 100px}
-h1{text-align:center;font-family:'Playfair Display',serif;font-size:48px;margin-bottom:12px}
-.subtitle{text-align:center;opacity:.8;margin-bottom:60px}
-h2{font-family:'Playfair Display',serif;margin:60px 0 24px;font-size:28px}
+
+/* Arka plan ambient parıltıları */
+body::after {
+content:'';
+position:absolute;
+width:100%;
+height:100%;
+top:0; left:0;
+background-image: 
+    radial-gradient(circle 2px at 15% 20%, rgba(255,255,255,0.2) 0%, transparent 100%),
+    radial-gradient(circle 1.5px at 80% 30%, rgba(255,255,255,0.15) 0%, transparent 100%),
+    radial-gradient(circle 2px at 40% 70%, rgba(255,255,255,0.1) 0%, transparent 100%),
+    radial-gradient(circle 2px at 85% 80%, rgba(255,255,255,0.2) 0%, transparent 100%);
+pointer-events:none;
+z-index:0;
+}
+
+.container{
+max-width:900px;
+width:100%;
+margin:0 auto;
+padding:60px 24px 100px;
+position:relative;
+z-index:1;
+}
+
+/* Ana Başlık Tasarımı */
+h1{
+text-align:center;
+font-family:'Playfair Display',serif;
+font-size:46px;
+margin-bottom:6px;
+letter-spacing:2.5px;
+color:#ffffff;
+font-weight:700;
+text-shadow: 0 0 30px rgba(157, 23, 77, 0.5), 0 2px 12px rgba(0,0,0,0.6);
+}
+
+.divider {
+width: 140px;
+height: 2px;
+background: linear-gradient(90deg, transparent, rgba(157,23,77,0.9), transparent);
+margin: 0 auto 20px auto;
+}
+
+.subtitle{
+text-align:center;
+font-size:17px;
+line-height:1.8;
+margin-bottom:60px;
+color:#e2e8f0;
+font-style:italic;
+}
+
+/* Bölüm Başlıkları (Ortalanmış, Işıltılı ve Çizgili Estetik) */
+.section-title-wrapper {
+text-align: center;
+margin: 70px 0 30px;
+}
+
+h2{
+font-family:'Playfair Display',serif;
+font-size:28px;
+margin:0 0 10px;
+letter-spacing:1px;
+color:#ffffff;
+text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.section-divider {
+width: 80px;
+height: 2px;
+background: linear-gradient(90deg, transparent, rgba(157,23,77,0.8), transparent);
+margin: 0 auto;
+}
 
 .cards{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:24px
+gap:24px;
 }
 
 .card{
 padding:24px;
 border-radius:18px;
-background:rgba(255,255,255,.06);
-backdrop-filter:blur(6px);
-box-shadow:0 10px 30px rgba(0,0,0,.35);
-transition:.3s
+background:rgba(255,255,255,0.03);
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,0.08);
+box-shadow:0 15px 35px rgba(0,0,0,0.4);
+transition:all 0.3s ease;
 }
-.card:hover{transform:translateY(-6px)}
+
+.card:hover{
+transform:translateY(-6px);
+border-color:rgba(157,23,77,0.4);
+box-shadow:0 20px 40px rgba(0,0,0,0.6);
+}
 
 .card h3{
 font-family:'Playfair Display',serif;
 margin:0 0 8px;
-font-size:22px
+font-size:20px;
+color:#ffffff;
+letter-spacing:0.5px;
 }
-.author{font-size:14px;opacity:.75;margin-bottom:18px}
+
+.author{
+font-size:13.5px;
+color:#cbd5e1;
+margin-bottom:18px;
+font-style:italic;
+}
 
 .card-buttons{
 display:flex;
 gap:10px;
-flex-wrap:wrap
+flex-wrap:wrap;
 }
 
 .btn{
 padding:8px 18px;
-font-size:14px;
+font-size:13.5px;
 border-radius:20px;
-border:1px solid rgba(255,255,255,.6);
-background:transparent;
+border:1px solid rgba(255,255,255,0.25);
+background:rgba(255,255,255,0.05);
 color:#fff;
 cursor:pointer;
-transition:.3s;
-text-decoration:none
+transition:all 0.3s ease;
+text-decoration:none;
 }
-.btn:hover{background:#fff;color:#2a0d1c}
+
+.btn:hover{
+background:#fff;
+color:#2a0d1c;
+border-color:#fff;
+transform:translateY(-2px);
+box-shadow: 0 5px 15px rgba(255,255,255,0.2);
+}
 
 .modal{
 position:fixed;
 inset:0;
-background:rgba(5,10,20,.8);
-backdrop-filter:blur(6px);
+background:rgba(3,7,18,0.85);
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
 display:none;
 align-items:center;
 justify-content:center;
-z-index:1000
+z-index:1000;
 }
 .modal.active{display:flex}
 
 .modal-content{
-background:linear-gradient(180deg,#0a132b,#3b0d24);
+background:linear-gradient(135deg,#030712 0%,#0f172a 50%,#2e081c 100%);
 padding:36px;
 border-radius:22px;
+border:1px solid rgba(255,255,255,0.12);
 max-width:640px;
 width:90%;
 max-height:80vh;
 overflow-y:auto;
-position:relative
+position:relative;
+box-shadow:0 25px 50px rgba(0,0,0,0.8);
 }
+
 .modal-content h3{
 font-family:'Playfair Display',serif;
 margin-top:0;
-font-size:30px
+font-size:26px;
+color:#fff;
+letter-spacing:1px;
 }
+
 .modal-content p{
 line-height:1.9;
-font-size:17px;
-white-space:pre-wrap
+font-size:16px;
+white-space:pre-wrap;
+color:#e2e8f0;
 }
+
 .close{
 position:absolute;
 top:16px;
 right:20px;
 font-size:26px;
-cursor:pointer
+cursor:pointer;
+color:#cbd5e1;
+transition:color 0.2s;
 }
+.close:hover{color:#fff;}
 
 .back{text-align:center;margin-top:80px}
-.back a{color:#fff;text-decoration:none;opacity:.7}
-.back a:hover{opacity:1}
+.back a{color:#cbd5e1;text-decoration:none;transition:color 0.2s;font-size:15px;}
+.back a:hover{color:#fff;text-decoration:underline;}
 
-.contact{text-align:center;margin-top:60px;font-size:15px;opacity:.85}
-footer{text-align:center;margin-top:40px;font-size:14px;opacity:.6}
+.contact{text-align:center;margin-top:60px;font-size:15px;color:#cbd5e1;}
+footer{text-align:center;margin-top:30px;font-size:13px;color:#94a3b8;}
 
 .contact a,
 .comment-box a {
   color: #f3f3f3;
   text-decoration: none;
+  transition: color 0.2s;
+}
+.contact a:hover {
+  text-decoration: underline;
 }
 </style>
 </head>
@@ -122,9 +235,14 @@ footer{text-align:center;margin-top:40px;font-size:14px;opacity:.6}
 <div class="container">
 
 <h1>Şiirler</h1>
+<div class="divider"></div>
 <div class="subtitle">Kimi bana ait, kimi seslendirdiğim dizeler…</div>
 
-<h2>Kendi Şiirlerim</h2>
+<!-- Kendi Şiirlerim Başlığı (Estetik ve Ortalanmış) -->
+<div class="section-title-wrapper">
+    <h2>Kendi Şiirlerim</h2>
+    <div class="section-divider"></div>
+</div>
 
 <div class="cards">
 
@@ -184,15 +302,119 @@ footer{text-align:center;margin-top:40px;font-size:14px;opacity:.6}
 
 </div>
 
+<!-- Değerli Şairlerimizin Dizeleri Başlığı (Estetik ve Ortalanmış) -->
+<div class="section-title-wrapper">
+    <h2>Değerli Şairlerimizin Dizeleri</h2>
+    <div class="section-divider"></div>
+</div>
+
+<div class="cards">
+
+<div class="card"><h3>MAVİ GÖZLÜ DEV</h3><div class="author">✍️ Şair: Nâzım Hikmet</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('maviGozluDev')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/3qiRGDiT9rnLyjmZTCnAGz">Dinle</a>
+</div></div>
+
+<div class="card"><h3>GİT</h3><div class="author">✍️ Şair: Cemal Safi</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('cemalSafiGit')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/3nZEGqZyy0y19mMJNew8au">Dinle</a>
+</div></div>
+
+<div class="card"><h3>ÜÇ KEZ SENİ SEVİYORUM DİYE UYANDIM</h3><div class="author">✍️ Şair: İlhan Berk</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('ilhanBerkUcKez')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/2ltO965FtrajGIHrWUexA9">Dinle</a>
+</div></div>
+
+<div class="card"><h3>BEN SENDEN ÖNCE ÖLMEK İSTERİM</h3><div class="author">✍️ Şair: Nâzım Hikmet</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('nazimBenSendenOnce')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/1hVv9l4KudHpoM2iYli9VJ">Dinle</a>
+</div></div>
+
+<div class="card"><h3>GİDELİM BURALARDAN</h3><div class="author">✍️ Şair: Ali Lidar</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('aliLidarGidelim')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/2oQTk2U2TKvzA1Dec9ktHn">Dinle</a>
+</div></div>
+
+<div class="card"><h3>YERYÜZÜ AŞKIN YÜZÜ OLUNCAYA DEK</h3><div class="author">✍️ Şair: Adnan Yücel</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('adnanYucelYeryuzu')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/2RxXJmiCDJRGw8lBgoof2C">Dinle</a>
+</div></div>
+
+<div class="card"><h3>KOŞARADIM</h3><div class="author">✍️ Şair: Şükrü Erbaş</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('sukruErbasKosaradim')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/0dxXwp5oUleJiydkaDmSva">Dinle</a>
+</div></div>
+
+<div class="card"><h3>TUT YÜREĞİMDEN USTAM</h3><div class="author">✍️ Şair: Serkan Uçar</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('serkanUcarTutYuregimden')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/32bWJSvJGk7MIfavjCiqPW">Dinle</a>
+</div></div>
+
+<div class="card"><h3>TANIŞMA ŞİİRİ</h3><div class="author">✍️ Şair: Serkan Uçar</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('serkanUcarTanisma')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/52GX18ZFVVaGi1MoYt5GQu">Dinle</a>
+</div></div>
+
+<div class="card"><h3>SENİNLE YAŞAMAK</h3><div class="author">✍️ Şair: Serkan Uçar</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('serkanUcarSeninleYasamak')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/2sjbbLLLtcnp7w3BUqXC9A">Dinle</a>
+</div></div>
+
+<div class="card"><h3>BİR GÜN</h3><div class="author">✍️ Şair: Ümit Yaşar Oğuzcan</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('umitYasarBirGun')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/1AJNXQ0Vs4q46DQFpcrmw1">Dinle</a>
+</div></div>
+
+<div class="card"><h3>DESEM Kİ</h3><div class="author">✍️ Şair: Cahit Sıtkı Tarancı</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('cahitSitkiDesemKi')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/5pj3cr8FbMG1CzCfM0IQey">Dinle</a>
+</div></div>
+
+<div class="card"><h3>TAHİR'LE ZÜHRE MESELESİ</h3><div class="author">✍️ Şair: Nâzım Hikmet</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('nazimTahirleZuhre')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/385iKv6ArhNt7kZb3kbJYZ">Dinle</a>
+</div></div>
+
+<div class="card"><h3>YAŞADIKLARIMDAN ÖĞRENDİĞİM BİR ŞEY VAR</h3><div class="author">✍️ Şair: Ataol Behramoğlu</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('ataolYasadiklarimdan')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/5Bsw8yCHEedHPwcvXLms0V">Dinle</a>
+</div></div>
+
+<div class="card"><h3>KİTABE-İ SENG-İ MEZAR</h3><div class="author">✍️ Şair: Orhan Veli Kanık</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('orhanVeliKitabe')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/2w41YhUHrS8rEhIH7rbnTx">Dinle</a>
+</div></div>
+
+<div class="card"><h3>BÖYLE BİR GİTMEK</h3><div class="author">✍️ Şair: Serkan Uçar</div>
+<div class="card-buttons">
+<button class="btn" onclick="openModal('serkanUcarBoyleBirGitmek')">Metni Oku</button>
+<a class="btn" target="_blank" href="https://open.spotify.com/episode/4oHNDY6nvrY4zZVNryPD9w">Dinle</a>
+</div></div>
+</div>
+
 <div class="back"><a href="index.html">← Anasayfaya Dön</a></div>
+
 <div class="contact">
     Yorumlarınız benim için kıymetlidir.<br>
-    <div>📩 <a href="mailto:zahitmelih.turkoglu@gmail.com">
-      zahitmelih.turkoglu@gmail.com
-    </a>
-  </div>
+    <div style="margin-top:6px;">📩 <a href="mailto:zahitmelih.turkoglu@gmail.com">zahitmelih.turkoglu@gmail.com</a></div>
+</div>
 
-  <footer>© Şiir Kıyısı</footer>
+<footer>© Şiir Kıyısı — Tüm hakları saklıdır.</footer>
 
 </div>
 
@@ -420,9 +642,174 @@ Sanatçı ki, şahsa münhasır fırçası
 Bulutlar ise bu evrimin yekpare parçası,
 Gökyüzü şimdi bir sanat harikası.
 Sokakları tazeler seslerinin hafızası,
-Çiçekçilerde satılan gündüzsefası…
+Çiçekçilerde satılan gündüzsefasi…
 Gökyüzü şimdi aydınlık bir renk atlası,
-Ümidin kızıl muharibi, huzurun kumpanyası...`}
+Ümidin kızıl muharibi, huzurun kumpanyası...`},
+
+maviGozluDev:{title:"MAVİ GÖZLÜ DEV",text:`O mavi gözlü bir devdi.
+Minnacık bir kadın sevdi.
+Kadının hayali minnacık bir evdi,
+bahçesinde ebruliii hanımeli açan bir ev.
+
+Bir dev gibi seviyordu dev.
+Ve elleri öyle büyük işler için hazırlanmıştı ki devin,
+yapamazdı yapısını, çalamazdı kapısını
+bahçesinde ebruliiii hanımeli açan evin.
+
+O mavi gözlü bir devdi.
+Minnacık bir kadın sevdi.
+Mini minnacıktı kadın.
+Rahata acıktı kadın yoruldu devin büyük yolunda.
+Ve elveda! deyip mavi gözlü deve,
+girdi zengin bir cücenin kolunda
+bahçesinde ebruliiii hanımeli açan eve.
+
+Şimdi anlıyor ki mavi gözlü dev,
+dev gibi sevgilere mezar bile olamaz:
+bahçesinde ebruliiiii hanımeli açan ev...`},
+
+cemalSafiGit:{title:"GİT",text:`Git iş işten geçmeden, çok geç olmadan vakit,
+Günahıma girmeden, katilim olmadan git!
+Git de şen şakrak geçen günlerime gün ekle,
+Beni kahkahaların sustuğu yerde bekle.
+Git ki siyah gözlerin arkada kalmasınlar,
+Git ki gamlı yüzümün hüznüyle dolmasınlar.
+Madem ki benli hayat sana kafes kadar dar,
+Uzaklaş ellerimden uçabildiğin kadar.
+Hadi git, benden sana dilediğince izin,
+Öyle bir uzaklaş ki karda kalmasın izin.`},
+
+ilhanBerkUcKez:{title:"ÜÇ KEZ SENİ SEVİYORUM DİYE UYANDIM",text:`Üç kez seni seviyorum diye uyandım.
+Tuttum sonra çiçeklerin suyunu değiştirdim.
+Bir bulut başını almış gidiyordu görüyordum.
+Sabahın bir yerinden düşmüş gibiydi yüzün.
+Sokağı balkonları yarım kalmış bir şiiri teptim.
+Sıkıldım yemekler yaptım kendime otlar kuruttum.
+-Taflanım! diyordu bir ses duyuyordum.
+Cumhuriyetin ilk günleri gibiydi yüzün.
+Karanfil sakız kokan soluğunu üstümde duydum.
+Eskitiyorum eskitiyorum kalıyor ne kadar güzel olduğun.`},
+
+nazimBenSendenOnce:{title:"BEN SENDEN ÖNCE ÖLMEK İSTERİM",text:`Ben senden önce ölmek isterim.
+Gidenin arkasından gelen gideni bulacak mı zannediyorsun?
+Ben zannetmiyorum bunu.
+İyisi mi, beni yaktırırsın,
+odanda ocağın üstüne korsun içinde bir kavanozun.
+Kavanoz camdan olsun, şeffaf, beyaz camdan olsun
+ki içinde beni görebilesin...
+Fedakârlığımı anlıyorsun :
+vazgeçtim toprak olmaktan,
+vazgeçtim çiçek olmaktan
+senin yanında kalabilmek için.
+Ve toz oluyorum yaşıyorum yanında senin.
+Sonra, sen de ölünce kavanozuma gelirsin.
+Ve orda beraber yaşarız külümün içinde külün,
+ta ki bir savruk gelin yahut vefasız bir torun
+bizi ordan atana kadar...`},
+
+aliLidarGidelim:{title:"GİDELİM BURALARDAN",text:`gidelim buralardan, dayanamıyorum
+bir şeyler kopuyor sanki içimden
+her akşam bir acı saplanıyor sol yanıma
+gidelim buralardan, dayanamıyorum.
+
+gidelim, ne duruyoruz hâlâ
+burası bize göre değil
+burada herkes biraz yaralı
+burada herkes biraz yorgun
+gidelim, deniz olan bir yerlere gidelim
+ya da dağ başı olsun, fark etmez
+yeter ki bu kalabalıktan uzak olalım.`},
+
+adnanYucelYeryuzu:{title:"YERYÜZÜ AŞKIN YÜZÜ OLUNCAYA DEK",text:`Ayrılıktan koştuk geldik
+Külkedisinden elma şekerine kadar
+Bütün masalları atıp sırtımızdan
+Çırılçıplak kaldık dağ başlarında
+Gözlerimizde bir macera türküsü
+Elimizde tomurcuksuz dallar
+Biz bu kavgaya
+Ömrümüzü verdik arkadaş
+Dağları devirdik, yolları aştık
+Yeryüzü aşkın yüzü oluncaya dek!`},
+
+sukruErbasKosaradim:{title:"KOŞARADIM",text:`Gözlerinin uzağında bir ömür tüketiyorum
+Hangi yoldan geçsem seni buluyorum
+Bir rüzgar esiyor saçlarının kokusundan
+Kaçıyorum kendimden, sana koşaradim...`},
+
+serkanUcarTutYuregimden:{title:"TUT YÜREĞİMDEN USTAM",text:`Tut yüreğimden ustam,
+Gözlerimden aklıma sızan bu acı dinsin.
+Bir yorgunluk var üstümde, asırlık bir yorgunluk
+Bütün yollar kapandı, sanki dünya küçüldü.
+Tut yüreğimden ustam,
+Birlikte yürüyelim bu dağları.`},
+
+serkanUcarTanisma:{title:"TANIŞMA ŞİİRİ",text:`Göz göze geldik kalabalığın ortasında
+Bir an durdu zaman, akmaz oldu saatler
+Senle tanışmak bir ömre bedelmiş meğer
+Adını sordum, içimdeki ses "huzur" dedi.`},
+
+serkanUcarSeninleYasamak:{title:"SENİNLE YAŞAMAK",text:`Seninle yaşamak bir şiirin içinde uyanmak gibi
+Her kelimesi aşk, her dizesi umut dolu
+Sensiz geçen her saniye ömrümden düşerken
+Seninle var oluyorum bu yalan dünyada.`},
+
+umitYasarBirGun:{title:"BİR GÜN",text:`Bir gün anlarsın ne demek istediğimi
+Aynalara küstüğünde, saçlarına ak düştüğünde
+Beni ararsın o eski sokaklarda, meyhanelerde
+Ama çok geç olur, ben çoktan gitmiş olurum.`},
+
+cahitSitkiDesemKi:{title:"DESEM Kİ",text:`Desem ki vakitlerden bir nisan akşamıdır,
+Rüzgarların tepemde delirdiği zamanlar,
+Gözlerin aklima gelir,
+Aklım durur,
+Vakarım tavan yapar.
+Desem ki seni ne kadar çok sevdim,
+Bunu bir ben bilirim, bir de yaradan.`},
+
+nazimTahirleZuhre:{title:"TAHİR'LE ZÜHRE MESELESİ",text:`Tahir olmak da ayıp değil Zühre olmak da
+
+hattâ sevda yüzünden ölmek de ayıp değil,
+bütün iş Tahirle Zühre olabilmekte
+yani yürekte.
+
+Meselâ bir barikatta dövüşerek
+meselâ kuzey kutbunu keşfe giderken
+meselâ denerken damarlarında bir serumu
+ölmek ayıp olur mu?
+
+Tahir olmak da ayıp değil Zühre olmak da
+hattâ sevda yüzünden ölmek de ayıp değil.
+
+Seversin dünyayı doludizgin
+ama o bunun farkında değildir
+ayrılmak istemezsin dünyadan
+ama o senden ayrılacak
+yani sen elmayı seviyorsun diye
+elmanın da seni sevmesi şart mı?
+Yani Tahiri Zühre sevmeseydi artık
+yahut hiç sevmeseydi
+Tahir ne kaybederdi Tahirliğinden?
+
+
+Tahir olmak da ayıp değil Zühre olmak da
+hattâ sevda yüzünden ölmek de ayıp değil.`},
+
+ataolYasadiklarimdan:{title:"YAŞADIKLARIMDAN ÖĞRENDİĞİM BİR ŞEY VAR",text:`Yaşadıklarımdan öğrettiğim bir şey var:
+Yaşadın mı büyük yaşayacaksın, ırmaklara, göğe, bütün evrene karışcasına
+Çünkü ömür dediğimiz kısa bir an
+And katlanılmaz bu dünyanın kahrı
+Yalnızca büyük sevgilerin omuzlarında taşınır.`},
+
+orhanVeliKitabe:{title:"KİTABE-İ SENG-İ MEZAR",text:`Hiçbir şeyden çekmedi dunyada
+H çektiği çorba kılıktan
+Ekmek elden su gölden
+Yaşadı durdu safir gibi
+Yazık oldu Süleyman Efendi'ye.`},
+
+serkanUcarBoyleBirGitmek:{title:"BÖYLE BİR GİTMEK",text:`Böyle bir gitmek, sessiz ve sedasız
+Arkaya bile bakmadan, kapıyı yavaşça kapatıp
+Gözyaşlarını içine akıtarak gitmek
+En çok da sevene koyar böyle bir gidiş...`}
 };
 
 function openModal(k){
